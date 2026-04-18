@@ -73,6 +73,12 @@ export default function Dashboard() {
           <Link to="/analyze" className="sidebar-link">
             <span className="sidebar-link-icon">✨</span> Analyze Resume
           </Link>
+          <Link to="/compare" className="sidebar-link">
+            <span className="sidebar-link-icon">⚖️</span> Compare
+          </Link>
+          <Link to="/templates" className="sidebar-link">
+            <span className="sidebar-link-icon">📄</span> Templates
+          </Link>
         </nav>
         <div className="sidebar-user">
           <div className="sidebar-user-name">{user?.name}</div>
@@ -121,7 +127,7 @@ export default function Dashboard() {
           <Link to="/analyze" className="btn-add"><span>+</span> Analyze New Resume</Link>
         </div>
 
-        {/* Search + Filter + Sort Bar */}
+        {/* Search + Filter + Sort */}
         <div style={{
           display: 'flex', gap: 12, marginBottom: 16, flexWrap: 'wrap',
           background: 'var(--card)', border: '1px solid var(--border)',
@@ -139,32 +145,24 @@ export default function Dashboard() {
               fontFamily: 'var(--font-body)'
             }}
           />
-          <select
-            value={filterStatus}
-            onChange={e => setFilterStatus(e.target.value)}
+          <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)}
             style={{
               padding: '9px 14px', borderRadius: 8, background: 'var(--bg2)',
               border: '1px solid var(--border)', color: 'var(--text)',
-              fontSize: 14, outline: 'none', cursor: 'pointer',
-              fontFamily: 'var(--font-body)'
-            }}
-          >
+              fontSize: 14, outline: 'none', cursor: 'pointer', fontFamily: 'var(--font-body)'
+            }}>
             <option value="all">All Status</option>
             <option value="shortlisted">✅ Shortlisted</option>
             <option value="analyzed">🔵 Analyzed</option>
             <option value="rejected">❌ Rejected</option>
             <option value="pending">⏳ Pending</option>
           </select>
-          <select
-            value={sortBy}
-            onChange={e => setSortBy(e.target.value)}
+          <select value={sortBy} onChange={e => setSortBy(e.target.value)}
             style={{
               padding: '9px 14px', borderRadius: 8, background: 'var(--bg2)',
               border: '1px solid var(--border)', color: 'var(--text)',
-              fontSize: 14, outline: 'none', cursor: 'pointer',
-              fontFamily: 'var(--font-body)'
-            }}
-          >
+              fontSize: 14, outline: 'none', cursor: 'pointer', fontFamily: 'var(--font-body)'
+            }}>
             <option value="date_desc">📅 Newest First</option>
             <option value="date_asc">📅 Oldest First</option>
             <option value="score_desc">⬆️ Highest Score</option>
@@ -192,14 +190,11 @@ export default function Dashboard() {
             <div className="empty-state">
               <div className="empty-state-icon">🔍</div>
               <p className="empty-state-text">No results match your search or filter.</p>
-              <button
-                onClick={() => { setSearch(''); setFilterStatus('all'); }}
-                style={{
-                  marginTop: 16, padding: '8px 20px', borderRadius: 8,
-                  background: 'var(--primary)', color: '#fff',
-                  border: 'none', cursor: 'pointer', fontSize: 14
-                }}
-              >Clear Filters</button>
+              <button onClick={() => { setSearch(''); setFilterStatus('all'); }} style={{
+                marginTop: 16, padding: '8px 20px', borderRadius: 8,
+                background: 'var(--primary)', color: '#fff', border: 'none',
+                cursor: 'pointer', fontSize: 14
+              }}>Clear Filters</button>
             </div>
           ) : (
             <table>
@@ -209,6 +204,7 @@ export default function Dashboard() {
                   <th>Job Title</th>
                   <th>Score</th>
                   <th>Status</th>
+                  <th>Rating</th>
                   <th>Date</th>
                   <th>Action</th>
                 </tr>
@@ -228,23 +224,23 @@ export default function Dashboard() {
                         {r.status.charAt(0).toUpperCase() + r.status.slice(1)}
                       </span>
                     </td>
+                    <td style={{ color: '#f59e0b', fontSize: 14 }}>
+                      {r.rating > 0
+                        ? '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating)
+                        : <span style={{ color: 'var(--text-dim)', fontSize: 12 }}>—</span>
+                      }
+                    </td>
                     <td style={{ color: 'var(--text-muted)', fontSize: 13 }}>
                       {new Date(r.createdAt).toLocaleDateString()}
                     </td>
                     <td style={{ display: 'flex', gap: 8 }}>
-                      <button
-                        onClick={() => navigate(`/resume/${r._id}`)}
-                        style={{
-                          padding: '5px 14px', fontSize: 12, borderRadius: 8,
-                          border: '1px solid rgba(99,102,241,0.4)',
-                          background: 'rgba(99,102,241,0.1)',
-                          color: 'var(--primary-light)',
-                          cursor: 'pointer', fontWeight: 500
-                        }}
-                      >👁 View</button>
-                      <button className="btn-delete" onClick={() => handleDelete(r._id)}>
-                        Delete
-                      </button>
+                      <button onClick={() => navigate(`/resume/${r._id}`)} style={{
+                        padding: '5px 14px', fontSize: 12, borderRadius: 8,
+                        border: '1px solid rgba(99,102,241,0.4)',
+                        background: 'rgba(99,102,241,0.1)',
+                        color: 'var(--primary-light)', cursor: 'pointer', fontWeight: 500
+                      }}>👁 View</button>
+                      <button className="btn-delete" onClick={() => handleDelete(r._id)}>Delete</button>
                     </td>
                   </tr>
                 ))}

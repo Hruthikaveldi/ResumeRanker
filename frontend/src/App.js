@@ -6,6 +6,8 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Analyze from './pages/Analyze';
 import ResumeDetail from './pages/ResumeDetail';
+import Compare from './pages/Compare';
+import Templates from './pages/Templates';
 import './App.css';
 
 function PrivateRoute({ children }) {
@@ -26,11 +28,13 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
-          <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
-          <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-          <Route path="/analyze" element={<PrivateRoute><Analyze /></PrivateRoute>} />
+          <Route path="/login"      element={<PublicRoute><Login /></PublicRoute>} />
+          <Route path="/register"   element={<PublicRoute><Register /></PublicRoute>} />
+          <Route path="/dashboard"  element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+          <Route path="/analyze"    element={<PrivateRoute><Analyze /></PrivateRoute>} />
           <Route path="/resume/:id" element={<PrivateRoute><ResumeDetail /></PrivateRoute>} />
+          <Route path="/compare"    element={<PrivateRoute><Compare /></PrivateRoute>} />
+          <Route path="/templates"  element={<PrivateRoute><Templates /></PrivateRoute>} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
