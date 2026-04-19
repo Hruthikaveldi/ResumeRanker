@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
@@ -8,6 +9,8 @@ import Analyze from './pages/Analyze';
 import ResumeDetail from './pages/ResumeDetail';
 import Compare from './pages/Compare';
 import Templates from './pages/Templates';
+import Analytics from './pages/Analytics';
+import Profile from './pages/Profile';
 import './App.css';
 
 function PrivateRoute({ children }) {
@@ -24,19 +27,23 @@ function PublicRoute({ children }) {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="/login"      element={<PublicRoute><Login /></PublicRoute>} />
-          <Route path="/register"   element={<PublicRoute><Register /></PublicRoute>} />
-          <Route path="/dashboard"  element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-          <Route path="/analyze"    element={<PrivateRoute><Analyze /></PrivateRoute>} />
-          <Route path="/resume/:id" element={<PrivateRoute><ResumeDetail /></PrivateRoute>} />
-          <Route path="/compare"    element={<PrivateRoute><Compare /></PrivateRoute>} />
-          <Route path="/templates"  element={<PrivateRoute><Templates /></PrivateRoute>} />
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/"           element={<Navigate to="/login" />} />
+            <Route path="/login"      element={<PublicRoute><Login /></PublicRoute>} />
+            <Route path="/register"   element={<PublicRoute><Register /></PublicRoute>} />
+            <Route path="/dashboard"  element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+            <Route path="/analyze"    element={<PrivateRoute><Analyze /></PrivateRoute>} />
+            <Route path="/resume/:id" element={<PrivateRoute><ResumeDetail /></PrivateRoute>} />
+            <Route path="/compare"    element={<PrivateRoute><Compare /></PrivateRoute>} />
+            <Route path="/templates"  element={<PrivateRoute><Templates /></PrivateRoute>} />
+            <Route path="/analytics"  element={<PrivateRoute><Analytics /></PrivateRoute>} />
+            <Route path="/profile"    element={<PrivateRoute><Profile /></PrivateRoute>} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
