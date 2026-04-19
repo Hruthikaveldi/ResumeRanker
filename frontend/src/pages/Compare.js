@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import Sidebar from '../components/Sidebar';
 
 export default function Compare() {
   const { user, logout } = useAuth();
@@ -164,31 +165,7 @@ export default function Compare() {
 
   return (
     <div className="dash-layout">
-      <aside className="sidebar">
-        <div className="sidebar-logo">
-          <div className="sidebar-logo-icon">📊</div>
-          <span className="sidebar-logo-text">ResumeRanker</span>
-        </div>
-        <nav className="sidebar-nav">
-          <Link to="/dashboard" className="sidebar-link">
-            <span className="sidebar-link-icon">🏠</span> Dashboard
-          </Link>
-          <Link to="/analyze" className="sidebar-link">
-            <span className="sidebar-link-icon">✨</span> Analyze Resume
-          </Link>
-          <span className="sidebar-link active">
-            <span className="sidebar-link-icon">⚖️</span> Compare
-          </span>
-          <Link to="/templates" className="sidebar-link">
-            <span className="sidebar-link-icon">📄</span> Templates
-          </Link>
-        </nav>
-        <div className="sidebar-user">
-          <div className="sidebar-user-name">{user?.name}</div>
-          <div className="sidebar-user-email">{user?.email}</div>
-          <button className="sidebar-logout" onClick={() => { logout(); navigate('/login'); }}>🚪 Sign out</button>
-        </div>
-      </aside>
+      <Sidebar />
 
       <main className="main-content">
         <h1 className="page-title">⚖️ Compare Resumes</h1>

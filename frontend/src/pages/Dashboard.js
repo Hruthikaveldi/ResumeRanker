@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import Sidebar from '../components/Sidebar';
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
@@ -61,31 +62,7 @@ export default function Dashboard() {
 
   return (
     <div className="dash-layout">
-      <aside className="sidebar">
-        <div className="sidebar-logo">
-          <div className="sidebar-logo-icon">📊</div>
-          <span className="sidebar-logo-text">ResumeRanker</span>
-        </div>
-        <nav className="sidebar-nav">
-          <span className="sidebar-link active">
-            <span className="sidebar-link-icon">🏠</span> Dashboard
-          </span>
-          <Link to="/analyze" className="sidebar-link">
-            <span className="sidebar-link-icon">✨</span> Analyze Resume
-          </Link>
-          <Link to="/compare" className="sidebar-link">
-            <span className="sidebar-link-icon">⚖️</span> Compare
-          </Link>
-          <Link to="/templates" className="sidebar-link">
-            <span className="sidebar-link-icon">📄</span> Templates
-          </Link>
-        </nav>
-        <div className="sidebar-user">
-          <div className="sidebar-user-name">{user?.name}</div>
-          <div className="sidebar-user-email">{user?.email}</div>
-          <button className="sidebar-logout" onClick={handleLogout}>🚪 Sign out</button>
-        </div>
-      </aside>
+      <Sidebar />
 
       <main className="main-content">
         <h1 className="page-title">Dashboard</h1>

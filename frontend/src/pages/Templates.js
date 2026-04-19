@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import Sidebar from '../components/Sidebar';
 
 const TEMPLATES = [
   {
@@ -189,31 +190,7 @@ export default function Templates() {
 
   return (
     <div className="dash-layout">
-      <aside className="sidebar">
-        <div className="sidebar-logo">
-          <div className="sidebar-logo-icon">📊</div>
-          <span className="sidebar-logo-text">ResumeRanker</span>
-        </div>
-        <nav className="sidebar-nav">
-          <Link to="/dashboard" className="sidebar-link">
-            <span className="sidebar-link-icon">🏠</span> Dashboard
-          </Link>
-          <Link to="/analyze" className="sidebar-link">
-            <span className="sidebar-link-icon">✨</span> Analyze Resume
-          </Link>
-          <Link to="/compare" className="sidebar-link">
-            <span className="sidebar-link-icon">⚖️</span> Compare
-          </Link>
-          <span className="sidebar-link active">
-            <span className="sidebar-link-icon">📄</span> Templates
-          </span>
-        </nav>
-        <div className="sidebar-user">
-          <div className="sidebar-user-name">{user?.name}</div>
-          <div className="sidebar-user-email">{user?.email}</div>
-          <button className="sidebar-logout" onClick={() => { logout(); navigate('/login'); }}>🚪 Sign out</button>
-        </div>
-      </aside>
+      <Sidebar />
 
       <main className="main-content">
         <h1 className="page-title">📄 Resume Templates</h1>
