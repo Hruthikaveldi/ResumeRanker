@@ -164,8 +164,6 @@ app.post('/api/resumes', auth, upload.single('resumeFile'), async (req, res) => 
       const ext = path.extname(req.file.originalname).toLowerCase();
       fileName = req.file.originalname; fileType = ext;
       if (ext === '.pdf') {
-  const pdfParseLib = require('pdf-parse');
-  const pdfParse = pdfParseLib.default || pdfParseLib;
   const data = await pdfParse(req.file.buffer);
   resumeText = data.text;
 } else if (['.docx','.doc'].includes(ext)) {
