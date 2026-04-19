@@ -18,6 +18,11 @@ export default function Sidebar() {
     { to: '/analytics',  icon: '📊', label: 'Analytics' },
     { to: '/templates',  icon: '📄', label: 'Templates' },
     { to: '/profile',    icon: '👤', label: 'Profile' },
+    null, // divider
+    { to: '/predictor',  icon: '🎯', label: 'Job Predictor' },
+    { to: '/roadmap',    icon: '🧩', label: 'Skill Roadmap' },
+    { to: '/interview',  icon: '🎤', label: 'Mock Interview' },
+    { to: '/ats',        icon: '🌍', label: 'ATS Checker' },
   ];
 
   return (
@@ -28,15 +33,23 @@ export default function Sidebar() {
       </div>
 
       <nav className="sidebar-nav">
-        {links.map(({ to, icon, label }) => (
-          <Link
-            key={to}
-            to={to}
-            className={`sidebar-link ${location.pathname === to ? 'active' : ''}`}
-          >
-            <span className="sidebar-link-icon">{icon}</span> {label}
-          </Link>
-        ))}
+        {links.map((link, i) =>
+          link === null ? (
+            <div key={`div-${i}`} style={{
+              height: 1, background: 'var(--border)',
+              margin: '8px 4px', opacity: 0.6
+            }} />
+          ) : (
+            <Link
+              key={link.to}
+              to={link.to}
+              className={`sidebar-link ${location.pathname === link.to ? 'active' : ''}`}
+            >
+              <span className="sidebar-link-icon">{link.icon}</span>
+              {link.label}
+            </Link>
+          )
+        )}
       </nav>
 
       {/* Theme Toggle */}

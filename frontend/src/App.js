@@ -11,6 +11,10 @@ import Compare from './pages/Compare';
 import Templates from './pages/Templates';
 import Analytics from './pages/Analytics';
 import Profile from './pages/Profile';
+import JobPredictor from './pages/JobPredictor';
+import SkillRoadmap from './pages/SkillRoadmap';
+import MockInterview from './pages/MockInterview';
+import ATSChecker from './pages/ATSChecker';
 import './App.css';
 
 function PrivateRoute({ children }) {
@@ -31,16 +35,20 @@ export default function App() {
       <AuthProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/"           element={<Navigate to="/login" />} />
-            <Route path="/login"      element={<PublicRoute><Login /></PublicRoute>} />
-            <Route path="/register"   element={<PublicRoute><Register /></PublicRoute>} />
-            <Route path="/dashboard"  element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-            <Route path="/analyze"    element={<PrivateRoute><Analyze /></PrivateRoute>} />
-            <Route path="/resume/:id" element={<PrivateRoute><ResumeDetail /></PrivateRoute>} />
-            <Route path="/compare"    element={<PrivateRoute><Compare /></PrivateRoute>} />
-            <Route path="/templates"  element={<PrivateRoute><Templates /></PrivateRoute>} />
-            <Route path="/analytics"  element={<PrivateRoute><Analytics /></PrivateRoute>} />
-            <Route path="/profile"    element={<PrivateRoute><Profile /></PrivateRoute>} />
+            <Route path="/"            element={<Navigate to="/login" />} />
+            <Route path="/login"       element={<PublicRoute><Login /></PublicRoute>} />
+            <Route path="/register"    element={<PublicRoute><Register /></PublicRoute>} />
+            <Route path="/dashboard"   element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+            <Route path="/analyze"     element={<PrivateRoute><Analyze /></PrivateRoute>} />
+            <Route path="/resume/:id"  element={<PrivateRoute><ResumeDetail /></PrivateRoute>} />
+            <Route path="/compare"     element={<PrivateRoute><Compare /></PrivateRoute>} />
+            <Route path="/templates"   element={<PrivateRoute><Templates /></PrivateRoute>} />
+            <Route path="/analytics"   element={<PrivateRoute><Analytics /></PrivateRoute>} />
+            <Route path="/profile"     element={<PrivateRoute><Profile /></PrivateRoute>} />
+            <Route path="/predictor"   element={<PrivateRoute><JobPredictor /></PrivateRoute>} />
+            <Route path="/roadmap"     element={<PrivateRoute><SkillRoadmap /></PrivateRoute>} />
+            <Route path="/interview"   element={<PrivateRoute><MockInterview /></PrivateRoute>} />
+            <Route path="/ats"         element={<PrivateRoute><ATSChecker /></PrivateRoute>} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
